@@ -31,10 +31,6 @@ public class MyList<A> implements Iterable<A> {
         public A data;
         public Node<A> next;
         public Node<A> previous;
-
-        public Node() {
-        }
-
         public Node(A data) {
             this.data = data;
         }
@@ -97,11 +93,10 @@ public class MyList<A> implements Iterable<A> {
         Node<A> nodeToRemove = handle.node;
 
         if (weakHashMap.containsKey(nodeToRemove.data)) {
-            List<WeakReference<Handle<A>>> l = weakHashMap.get(nodeToRemove.data);
-            for (WeakReference<Handle<A>> weakReference : l) {
-                Handle<A> ref = weakReference.get();
-                if (ref != null) {
-                    ref.setHandlerEmpty();
+            for (WeakReference<Handle<A>> weakReference :  weakHashMap.get(nodeToRemove.data)) {
+                Handle<A> handler = weakReference.get();
+                if (handler != null) {
+                    handler.invalidate();
                 }
             }
             weakHashMap.remove(nodeToRemove.data);
@@ -143,25 +138,23 @@ public class MyList<A> implements Iterable<A> {
 
     class MyListIterator implements Iterator<A> {
 
-        private Node<A> n;
+        private Node<A> node;
 
-        public MyListIterator(Node<A> n) {
-            this.n = n;
+        public MyListIterator(Node<A> node) {
+            this.node = node;
         }
 
         @Override
         public boolean hasNext() {
-            return n != null;
+            return node != null;
         }
 
         @Override
         public A next() {
-            A ret = n.data;
-            n = n.next;
-            return ret;
+            A nextValue = node.data;
+            node = node.next;
+            return nextValue;
 
         }
-
     }
-
 }

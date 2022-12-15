@@ -18,8 +18,8 @@ public class Handle<B> {
     MyList.Node<B> node;
     WeakReference<MyList<B>> list;
 
-    Handle(MyList.Node<B> ref, MyList<B> list) {
-        this.node = ref;
+    Handle(MyList.Node<B> node, MyList<B> list) {
+        this.node = node;
         this.list = new WeakReference<>(list);
     }
 
@@ -32,10 +32,11 @@ public class Handle<B> {
     }
 
     public Handle<B> getPrevious() {
+
         return list.get().getReference(node.previous);
     }
 
-    void setHandlerEmpty() {
+    void invalidate() {
         node = null;
         list = null;
     }

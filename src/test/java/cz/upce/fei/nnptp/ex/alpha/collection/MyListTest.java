@@ -49,10 +49,16 @@ public class MyListTest {
         collection.add("second");
         collection.add("third");
 
-        Handle<String> reference = collection.getReference("first");
-        collection.remove(reference);
+        Handle<String> firstReference = collection.getReference("first");
+        collection.remove(firstReference);
 
         assertEquals("second third", serialize(collection));
+
+        Handle<String> nextReference = firstReference.getNext();
+        Handle<String> previousReference = firstReference.getPrevious();
+
+        assertNull(nextReference);
+        assertNull(previousReference);
     }
 
     @Test
@@ -63,10 +69,16 @@ public class MyListTest {
         collection.add("second");
         collection.add("third");
 
-        Handle<String> reference = collection.getReference("second");
-        collection.remove(reference);
+        Handle<String> secondReference = collection.getReference("second");
+        collection.remove(secondReference);
 
         assertEquals("first third", serialize(collection));
+
+        Handle<String> nextReference = secondReference.getNext();
+        Handle<String> previousReference = secondReference.getPrevious();
+
+        assertNull(nextReference);
+        assertNull(previousReference);
     }
 
     @Test
@@ -77,10 +89,16 @@ public class MyListTest {
         collection.add("second");
         collection.add("third");
 
-        Handle<String> reference = collection.getReference("third");
-        collection.remove(reference);
+        Handle<String> thirdReference = collection.getReference("third");
+        collection.remove(thirdReference);
 
         assertEquals("first second", serialize(collection));
+
+        Handle<String> nextReference = thirdReference.getNext();
+        Handle<String> previousReference = thirdReference.getPrevious();
+
+        assertNull(nextReference);
+        assertNull(previousReference);
     }
 
     private <A> String serialize(MyList<A> list) {

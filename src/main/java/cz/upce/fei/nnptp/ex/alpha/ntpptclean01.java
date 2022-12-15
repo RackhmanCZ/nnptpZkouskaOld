@@ -22,26 +22,26 @@ public class ntpptclean01 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        MyList<String> strings = new MyList<>();
-        strings.add("hello");
-        strings.add("world");
-        strings.add("!");
-        strings.add("java");
+        MyList<String> helloWorldValues = new MyList<>();
+        helloWorldValues.add("hello");
+        helloWorldValues.add("world");
+        helloWorldValues.add("!");
+        helloWorldValues.add("java");
         
-        for (String string : strings) {
+        for (String string : helloWorldValues) {
             System.out.print(string + " ");
         }
         System.out.println();
         
-        Handle<String> hworld = strings.getReference("world");
-        System.out.println(hworld.getData());
+        Handle<String> handler = helloWorldValues.getReference("world");
+        System.out.println(handler.getData());
         
-        Handle<String> hexcl = hworld.getNext();
-        System.out.println(hexcl.getData());
+        handler = handler.getNext();
+        System.out.println(handler.getData());
         
-        strings.remove(hexcl.getPrevious());
+        helloWorldValues.remove(handler.getPrevious());
         
-        for (String string : strings) {
+        for (String string : helloWorldValues) {
             System.out.print(string + " ");
         }
         System.out.println();
