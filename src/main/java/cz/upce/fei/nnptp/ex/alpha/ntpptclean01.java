@@ -13,9 +13,6 @@ package cz.upce.fei.nnptp.ex.alpha;
 import cz.upce.fei.nnptp.ex.alpha.collection.Handle;
 import cz.upce.fei.nnptp.ex.alpha.collection.MyList;
 
-/**
- *
- */
 public class ntpptclean01 {
 
     /**

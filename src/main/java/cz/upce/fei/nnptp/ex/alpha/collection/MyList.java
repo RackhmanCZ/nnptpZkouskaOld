@@ -87,7 +87,7 @@ public class MyList<A> implements Iterable<A> {
 
     public void remove(Handle<A> handle) {
         if (handle.list.get() != this) {
-            throw new RuntimeException("f");
+            throw new RuntimeException("can not remove self.");
         }
 
         Node<A> nodeToRemove = handle.node;
